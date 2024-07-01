@@ -82,6 +82,20 @@ const RecorderComponent: React.FC<RecorderComponentProps> = ({
     }
   };
 
+  useEffect(() => {
+    return () => {
+      stopTimer();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isRecording) {
+      startRecording();
+    } else {
+      stopRecording();
+    }
+  }, [isRecording, startRecording, stopRecording]);
+
   const formatTime = (seconds: number): string => {
     const format = (val: number) => `0${Math.floor(val)}`.slice(-2);
     const mins = (seconds / 60) % 60;

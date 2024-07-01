@@ -123,7 +123,7 @@ export const CardItem = ({
 
   useEffect(() => {
     handleAnimations();
-  }, [isMouseEntered]);
+  }, [isMouseEntered ]);
 
   const handleAnimations = () => {
     if (!ref.current) return;
@@ -133,6 +133,10 @@ export const CardItem = ({
       ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
     }
   };
+  
+  useEffect(() => {
+    // Your effect code here
+  }, [handleAnimations]); // Add handleAnimations to the dependency array
 
   return (
     <Tag
