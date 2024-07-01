@@ -20,7 +20,7 @@ export function Page() {
 
           <CardItem   translateZ="50"
           className="text-xl font-bold text-neutral-600 dark:text-white">
-            <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?fm=jpg&w=3000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+            <Image alt = "" src="https://images.unsplash.com/photo-1574169208507-84376144848b?fm=jpg&w=3000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
                 Price - 1 Sol
             </CardItem>
           
