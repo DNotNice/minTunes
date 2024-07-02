@@ -11,14 +11,14 @@ export default function Home() {
         Welcome to minTunes
       </h1>
       <div className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center">
-        <p>Create NFT's with your voice</p>
+        <p>Create NFT&apos;s with your voice</p>
         <p>
           Just record yourself singing your favourite song, a movie dialgoue or just how are you feeling today
           
           <br />
-          we'll create an image for that and list it at our marketplace.
+          we&apos;ll create an image for that and list it at our marketplace.
           <br />
-          We won't judge you, trust me 🤗
+          We won&apos;t judge you, trust me 🤗
         </p>
       </div>
       <div className="mt-6 text-center">
@@ -27,7 +27,7 @@ export default function Home() {
           onClick={()=>router.push('/record ')}
           className= " z-30"
         >
-          Let's get Started
+          Let&&apos;s get Started
         </Button>
       </div>
     </div>

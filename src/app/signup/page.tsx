@@ -23,7 +23,7 @@ function page() {
         className="relative flex flex-col gap-4 items-center justify-center px-4"
       >
         <div className="text-3xl md:text-7xl font-bold dark:text-white text-center">
-          Don't worry we'll implement this soon 
+          Don&apos;t worry we&apos;ll implement this soon 
         </div>
         <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4">
         😤
