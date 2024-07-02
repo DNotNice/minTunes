@@ -134,9 +134,7 @@ export const CardItem = ({
     }
   };
   
-  useEffect(() => {
-    // Your effect code here
-  }, [handleAnimations]); // Add handleAnimations to the dependency array
+ 
 
   return (
     <Tag
