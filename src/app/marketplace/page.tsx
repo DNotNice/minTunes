@@ -19,9 +19,15 @@ export function Page() {
             </CardItem>
 
           <CardItem   translateZ="50"
-          className="text-xl font-bold text-neutral-600 dark:text-white">
-            <Image alt = "" src="https://images.unsplash.com/photo-1574169208507-84376144848b?fm=jpg&w=3000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-                Price - 1 Sol
+          className="text-xl font-bold text-neutral-600 dark:text-white mt-4 mb-4 ">
+              <Image
+                className="rounded-xl"
+                width={950}
+                height={100}
+                alt=""
+                src="https://images.unsplash.com/photo-1574169208507-84376144848b?fm=jpg&w=3000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              /> 
+             Price - 1 Sol
             </CardItem>
           
             <CardItem

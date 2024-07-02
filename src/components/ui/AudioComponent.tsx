@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 
 interface RecorderComponentProps {
@@ -19,28 +19,14 @@ const RecorderComponent: React.FC<RecorderComponentProps> = ({
   const audioElement = useRef<HTMLAudioElement>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    return () => {
-      stopTimer();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isRecording) {
-      startRecording();
-    } else {
-      stopRecording();
-    }
-  }, [isRecording]);
-
-  const startRecording = async () => {
+  const startRecording = useCallback(async () => {
     setTimer(0); // Reset timer
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       if (!stream) {
         throw new Error('Failed to get audio stream');
       }
-      
+
       mediaRecorder.current = new MediaRecorder(stream);
       startTimer();
 
@@ -56,17 +42,31 @@ const RecorderComponent: React.FC<RecorderComponentProps> = ({
       };
 
       mediaRecorder.current.start();
-    } catch (error:any) {
+    } catch (error: any) {
       console.error('Error starting recording:', error.message);
     }
-  };
+  }, [onStopRecording]);
 
-  const stopRecording = () => {
+  const stopRecording = useCallback(() => {
     stopTimer();
     if (mediaRecorder.current && mediaRecorder.current.state !== 'inactive') {
       mediaRecorder.current.stop();
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      stopTimer();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isRecording) {
+      startRecording();
+    } else {
+      stopRecording();
+    }
+  }, [isRecording, startRecording, stopRecording]);
 
   const playAudio = () => {
     if (audioUrl && audioElement.current) {
@@ -81,22 +81,6 @@ const RecorderComponent: React.FC<RecorderComponentProps> = ({
       audioElement.current.currentTime = 0;
     }
   };
-
-
-  
-  useEffect(() => {
-    return () => {
-      stopTimer();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isRecording) {
-      startRecording();
-    } else {
-      stopRecording();
-    }
-  }, [isRecording, startRecording, stopRecording]);
 
   const formatTime = (seconds: number): string => {
     const format = (val: number) => `0${Math.floor(val)}`.slice(-2);
@@ -156,8 +140,6 @@ const RecorderComponent: React.FC<RecorderComponentProps> = ({
   );
 };
 
-
-
 function CircleStopIcon(props :any ) {
   return (
     <svg
@@ -199,7 +181,6 @@ function CirclePauseIcon(props :any ) {
   )
 }
 
-
 function MicIcon(props :any) {
   return (
     <svg
@@ -221,7 +202,6 @@ function MicIcon(props :any) {
   )
 };
 
-
 function PlayIcon(props :any ) {
   return (
     <svg
@@ -240,4 +220,5 @@ function PlayIcon(props :any ) {
     </svg>
   )
 }
+
 export default RecorderComponent;

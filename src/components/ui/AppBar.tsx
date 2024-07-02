@@ -10,7 +10,7 @@ interface AppBarProps {
 
 const AppBar: React.FC<AppBarProps> = ({ currentTab }) => {
   return (
-    <div className="w-full bg-background border-b " >
+    <div className="w-full bg-black border-b " >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0 flex items-center">
