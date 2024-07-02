@@ -19,6 +19,14 @@ const RecorderComponent: React.FC<RecorderComponentProps> = ({
   const audioElement = useRef<HTMLAudioElement>(null);
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
 
+  const startTimer = useCallback(() => {
+    stopTimer(); // Clear any existing interval
+    timerInterval.current = setInterval(() => {
+      setTimer((prevTimer) => prevTimer + 1);
+    }, 1000);
+  }, []); // No dependencies needed for startTimer
+  
+
   const startRecording = useCallback(async () => {
     setTimer(0); // Reset timer
     try {
@@ -26,26 +34,27 @@ const RecorderComponent: React.FC<RecorderComponentProps> = ({
       if (!stream) {
         throw new Error('Failed to get audio stream');
       }
-
+  
       mediaRecorder.current = new MediaRecorder(stream);
-      startTimer();
-
+      startTimer(); // Include startTimer in the dependency array
+  
       let chunks: Blob[] = [];
       mediaRecorder.current.ondataavailable = (event) => {
         chunks.push(event.data);
       };
-
+  
       mediaRecorder.current.onstop = () => {
         const blob = new Blob(chunks, { type: 'audio/webm' });
         const url = URL.createObjectURL(blob);
         onStopRecording(url);
       };
-
+  
       mediaRecorder.current.start();
     } catch (error: any) {
       console.error('Error starting recording:', error.message);
     }
-  }, [onStopRecording]);
+  }, [onStopRecording, startTimer]);
+
 
   const stopRecording = useCallback(() => {
     stopTimer();
@@ -89,12 +98,7 @@ const RecorderComponent: React.FC<RecorderComponentProps> = ({
     return `${format(mins)}:${format(secs)}`;
   };
 
-  const startTimer = () => {
-    stopTimer(); // Clear any existing interval
-    timerInterval.current = setInterval(() => {
-      setTimer((prevTimer) => prevTimer + 1);
-    }, 1000);
-  };
+
 
   const stopTimer = () => {
     if (timerInterval.current) {
